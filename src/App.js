@@ -14,26 +14,42 @@ class App extends Component {
     clicked: []
   };
 
+  componentDidMount() {
+    // console.log(this.state.friends)
+    this.randomizeCards();
+  }
+
   isClicked = id => {
     // console.log("You clicked id " + id);
+    this.randomizeCards();
 
     if (this.state.clicked.includes(id)) {
-      console.log("Already clicked " + id);
+      // console.log("Already clicked " + id);
       this.setState({ clicked: [], score: 0 });
     } else {
-      console.log("First click of " + id);
+      // console.log("First click of " + id);
       this.state.clicked.push(id);
       this.setState({ score: this.state.score + 1 });
       if (this.state.score > this.state.highScore) {
         this.setState({ highScore: this.state.score });
       }
     }
-    console.log("Score: " + this.state.score + " High Score: " + this.state.highScore)
-    // Filter this.state.friends for friends with an id not equal to the id being removed
-    // const friends = this.state.friends.filter(friend => friend.id !== id);
-    // Set this.state.friends equal to the new friends array
-    // this.setState({ friends });
+
   };
+
+  randomizeCards = () => {
+    let randomizedList = [];
+    // for (var i = 0; i < this.state.friends.length; i++) {
+    while (randomizedList.length !== this.state.friends.length) {
+      let rng = Math.floor(Math.random() * this.state.friends.length);
+      if (!randomizedList.includes(this.state.friends[rng])) {
+        randomizedList.push(this.state.friends[rng]);
+      }
+
+    }
+    // console.log(randomizedList)
+    this.setState({ friends: randomizedList });
+  }
 
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
