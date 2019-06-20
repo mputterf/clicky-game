@@ -4,8 +4,8 @@ import "./style.css";
 function FriendCard(props) {
   return (
     <div className="card">
-      <div className="img-container">
-        <img alt={props.name} src={props.image} onClick={() => props.clickedFriend(props.id)} className="remove" />
+      <div className="img-container" onClick={() => props.clickedFriend(props.id)}>
+        <img alt={props.name} src={props.image} />
       </div>
       <div className="content">
         <ul>
