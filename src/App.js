@@ -11,8 +11,11 @@ class App extends Component {
     friends,
     highScore: 0,
     score: 0,
-    clicked: []
+    clicked: [],
+    didLose: false
   };
+
+  // const title = this.state.didLose ? "Clicky Game" : "You Lose"
 
   componentDidMount() {
     // console.log(this.state.friends)
@@ -25,13 +28,13 @@ class App extends Component {
 
     if (this.state.clicked.includes(id)) {
       // console.log("Already clicked " + id);
-      this.setState({ clicked: [], score: 0 });
+      this.setState({ clicked: [], score: 0, didLose: true });
     } else {
       // console.log("First click of " + id);
       this.state.clicked.push(id);
       this.setState({ score: this.state.score + 1 });
       if (this.state.score > this.state.highScore) {
-        this.setState({ highScore: this.state.score });
+        this.setState({ highScore: this.state.score, didLose: false });
       }
     }
 
@@ -59,7 +62,7 @@ class App extends Component {
         <NavBar score={this.state.score} highScore={this.state.highScore}>Clicky Game</NavBar>
 
         <Wrapper>
-          <Title>Clicky Game</Title>
+          <Title>{this.state.didLose ? "You Lose" : "Clicky Game"}</Title>
           {this.state.friends.map(friend => (
             <FriendCard
               clickedFriend={this.isClicked}
