@@ -33,9 +33,11 @@ class App extends Component {
       // console.log("First click of " + id);
       this.state.clicked.push(id);
       const newScore = this.state.score + 1;
-      this.setState({ score: newScore });
+      const newDidLose = false;
+      this.setState({ score: newScore, didLose: newDidLose });
       if (newScore > this.state.highScore) {
-        this.setState({ highScore: newScore, didLose: false });
+        this.setState({ highScore: newScore });
+        // console.log(this.state.didLose)
       }
     }
 
